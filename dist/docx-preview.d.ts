@@ -24,10 +24,15 @@ export interface Options {
     renderChanges: boolean;
     renderComments: boolean;
     renderAltChunks: boolean;
+    html: { //experimental, subject to change
+        element: (ns: string, tagName: string, props?: Partial<Record<any, any>>, children?: (Node | string)[]) => any;
+        comment: (text: string) => Comment;
+        text: (text: string) => Text;
+    }
 }
 //stub
 export type WordDocument = any;
 export declare const defaultOptions: Options;
 export declare function parseAsync(data: Blob | any, userOptions?: Partial<Options>): Promise<WordDocument>;
-export declare function renderDocument(document: WordDocument, bodyContainer: HTMLElement, styleContainer?: HTMLElement, userOptions?: Partial<Options>): Promise<any>;
+export declare function renderDocument(document: WordDocument, userOptions?: Partial<Options>): Promise<Node[]>;
 export declare function renderAsync(data: Blob | any, bodyContainer: HTMLElement, styleContainer?: HTMLElement, userOptions?: Partial<Options>): Promise<any>;
